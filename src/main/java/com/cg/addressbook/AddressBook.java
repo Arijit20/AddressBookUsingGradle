@@ -7,8 +7,19 @@ public class AddressBook {
 	Scanner in = new Scanner(System.in);
 	private ArrayList<Contacts> contactList = new ArrayList<>();
 	Map<String, Contacts> contactMap = new HashMap<>();
-	static Map<String, AddressBook> addressBookList = new TreeMap<>();
+	static Map<String, AddressBook> addressBookList = new HashMap<>();
 	
+	public AddressBook() {
+		contactList = new ArrayList<>();
+		contactMap = new HashMap<>();
+	}
+	public List<Contacts> getContactList() {
+		return contactList;
+	}
+
+	public Map<String, Contacts> getContactMap() {
+		return contactMap;
+	}
 	public void addNewContact() {
 		boolean b = false;
 		Contacts person = new Contacts();
@@ -61,7 +72,11 @@ public class AddressBook {
 		}
 	}
 	
-	public void editContact(String firstName, String lastName) {
+	public void editContact() {
+		System.out.println("Enter First Name :");
+    	String firstName = in.next();
+    	System.out.println("Enter Last Name :");
+    	String lastName = in.next();
 		String name = firstName+" "+lastName;
 		boolean b = false;
 		Boolean keyPresent = contactMap.containsKey(name);
@@ -121,6 +136,33 @@ public class AddressBook {
 				System.out.println("\nContact :" + (i + 1));
 				System.out.println(person);
 			}
-		
+	}
+	
+	public void showDetail() {
+		if(contactMap.size() == 0)
+			System.out.println("No contacts to show");
+		else {
+			Set set = contactMap.entrySet();
+			Iterator iterator = set.iterator();
+			while(iterator.hasNext()) {
+				Map.Entry entry = (Map.Entry)iterator.next();
+				System.out.println(entry.getValue());
+			}
+		}
+	}
+	public void deleteContact() {
+		System.out.println("Enter First Name :");
+    	String firstName = in.next();
+    	System.out.println("Enter Last Name :");
+    	String lastName = in.next();
+		String name = firstName+" "+lastName;
+		Boolean keyPresent = contactMap.containsKey(name);
+		if (keyPresent) {
+			Contacts c = contactMap.get(name);
+			contactList.remove(c);
+			contactMap.remove(name);
+		} else {
+			System.out.println("This name is not present in address book.");
+		}
 	}
 }
