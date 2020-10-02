@@ -28,7 +28,7 @@ public class AddressBookTest {
 	 @Test
 	    public void phoneNoTest() {
 	        ValidateContact contact = new ValidateContact();
-	        boolean result = contact.validatePhoneNo("91 1234567895");
+	        boolean result = contact.validatePhoneNo("1234567895");
 	        Assert.assertTrue(true);
 	 }
 	 @Test

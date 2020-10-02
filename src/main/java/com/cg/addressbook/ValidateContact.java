@@ -39,7 +39,7 @@ public class ValidateContact {
 	}
 
 	public boolean validatePhoneNo(String phoneNo) {
-		Pattern pattern = Pattern.compile("^\\d{2} [1-9]\\d{9}$");
+		Pattern pattern = Pattern.compile("^(\\d){10}$");
 		Matcher matcher = pattern.matcher(phoneNo);
 		Boolean b = matcher.find();
 		return b;
