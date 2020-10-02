@@ -161,4 +161,11 @@ public class AddressBook {
 	public List<Contacts> searchPersonsByState(String state) {
 		return contactList.stream().filter(person -> person.getState().equals(state)).collect(Collectors.toList());
 	}
+	public int countPersonsByCity(String city) {
+		return contactList.stream().filter(person -> person.getCity().equals(city)).collect(Collectors.toList()).size();
+	}
+
+	public int countPersonsByState(String state) {
+		return contactList.stream().filter(person -> person.getState().equals(state)).collect(Collectors.toList()).size();
+	}
 }

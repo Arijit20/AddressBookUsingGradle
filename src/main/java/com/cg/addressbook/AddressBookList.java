@@ -42,7 +42,11 @@ public class AddressBookList {
 					break;
 				else
 					System.out.println("Please Enter Correct Choice");
-
+				System.out.println("Enter 1 to add contact");
+				System.out.println("Enter 2 to edit contact");
+				System.out.println("Enter 3 to see addressbook details");
+				System.out.println("Enter 4 to delete contact");
+				System.out.println("Enter 5 to exit");
 				System.out.println("Enter Choice");
 				option = in.nextInt();
 			}
