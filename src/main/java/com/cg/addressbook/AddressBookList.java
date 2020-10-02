@@ -1,11 +1,14 @@
 package com.cg.addressbook;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
+import com.cg.addressbook.Contacts;
 
 public class AddressBookList {
 	Scanner in = new Scanner(System.in);
 	Map<String, AddressBook> addressBookMap = new TreeMap<>();
-
+    ArrayList<AddressBook> addressList = new ArrayList<>();
 	public AddressBookList() {
 		addressBookMap = new TreeMap<>();
 	}
@@ -57,6 +60,16 @@ public class AddressBookList {
 			System.out.println("Already Present");
 		else
 			addressBookMap.put(bookName, addressBook);
-
 	}
+	public void showDetails() {
+		if(addressBookMap.size() == 0)
+			System.out.println("No Address Book is present");
+		else {
+			for (int i = 0; i < addressList.size(); i++) {
+				AddressBook addressBook = addressList.get(i);
+				addressBook.showDetail();
+		}
+	}
+
+}
 }
