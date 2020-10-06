@@ -8,10 +8,10 @@ import com.cg.addressbook.Contacts;
 public class AddressBook {
 	Scanner in = new Scanner(System.in);
     static LinkedList<Contacts> contactList = new LinkedList<>();
-	Map<String, Contacts> contactMap = new HashMap<>();
+	Map<String, Contacts> contactMap = new TreeMap<>();
 
 	public AddressBook() {
-		contactMap = new HashMap<>();
+		contactMap = new TreeMap<>();
 	}
 
 	public Map<String, Contacts> getContactMap() {
