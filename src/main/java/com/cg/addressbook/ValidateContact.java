@@ -19,17 +19,13 @@ public class ValidateContact {
 		return b;
 	}
 
-
-	
 	public boolean validateAddress(String address) {
-			return true;
+		return true;
 	}
 
 	public boolean validateCity(String city) {
 		return true;
 	}
-
-	
 
 	public boolean validateZip(String zip) {
 		Pattern pattern = Pattern.compile("^([0-9]*){6}$");
@@ -46,17 +42,16 @@ public class ValidateContact {
 	}
 
 	public boolean validateEmail(String email) {
-		Pattern pattern = Pattern
-				.compile("^([a-z]){1,}[a-z0-9]*([.+_-]){0,1}[0-9a-z]+(@){1}([0-9a-z]+)(\\.([a-z]){2,}){1}(\\.[a-z]{2,})?$");
+		Pattern pattern = Pattern.compile(
+				"^([a-z]){1,}[a-z0-9]*([.+_-]){0,1}[0-9a-z]+(@){1}([0-9a-z]+)(\\.([a-z]){2,}){1}(\\.[a-z]{2,})?$");
 		Matcher matcher = pattern.matcher(email);
 		Boolean b = matcher.find();
 		return b;
 	}
 
 	public boolean validateState(String state) {
-		
+
 		return true;
 	}
-	
 
 }

@@ -2,20 +2,19 @@ package com.cg.addressbook;
 
 public class Contacts {
 	private String firstName, lastName, name, address, city, state, zip, phoneNo, email;
-	
-	ValidateContact validateContact = new ValidateContact();
 
+	ValidateContact validateContact = new ValidateContact();
 
 	public String getFirstName() {
 		return firstName;
 	}
 
 	public boolean setFirstName(String firstName) {
-	     boolean b = validateContact.validateFirstName(firstName);
-	    if(b)
-		this.firstName = firstName;
-	    else
-	    	System.out.println("Enter First Name again");
+		boolean b = validateContact.validateFirstName(firstName);
+		if (b)
+			this.firstName = firstName;
+		else
+			System.out.println("Enter First Name again");
 		return b;
 	}
 
@@ -24,12 +23,12 @@ public class Contacts {
 	}
 
 	public boolean setLastName(String lastName) {
-		 boolean b = validateContact.validateLastName(lastName);
-		    if(b)
+		boolean b = validateContact.validateLastName(lastName);
+		if (b)
 			this.lastName = lastName;
-		    else
-		    	System.out.println("Enter Last Name again");
-			return b;
+		else
+			System.out.println("Enter Last Name again");
+		return b;
 	}
 
 	public String getAddress() {
@@ -37,12 +36,12 @@ public class Contacts {
 	}
 
 	public boolean setAddress(String address) {
-		 boolean b = validateContact.validateAddress(address);
-		    if(b)
+		boolean b = validateContact.validateAddress(address);
+		if (b)
 			this.address = address;
-		    else
-		    	System.out.println("Enter Address again");
-			return b;
+		else
+			System.out.println("Enter Address again");
+		return b;
 	}
 
 	public String getCity() {
@@ -50,12 +49,12 @@ public class Contacts {
 	}
 
 	public boolean setCity(String city) {
-		 boolean b = validateContact.validateCity(city);
-		    if(b)
+		boolean b = validateContact.validateCity(city);
+		if (b)
 			this.city = city;
-		    else
-		    	System.out.println("Enter City again");
-			return b;
+		else
+			System.out.println("Enter City again");
+		return b;
 	}
 
 	public String getState() {
@@ -63,12 +62,12 @@ public class Contacts {
 	}
 
 	public boolean setState(String state) {
-		 boolean b = validateContact.validateState(state);
-		    if(b)
+		boolean b = validateContact.validateState(state);
+		if (b)
 			this.state = state;
-		    else
-		    	System.out.println("Enter State again");
-			return b;
+		else
+			System.out.println("Enter State again");
+		return b;
 	}
 
 	public String getZip() {
@@ -76,12 +75,12 @@ public class Contacts {
 	}
 
 	public boolean setZip(String zip) {
-		 boolean b = validateContact.validateZip(zip);
-		    if(b)
+		boolean b = validateContact.validateZip(zip);
+		if (b)
 			this.zip = zip;
-		    else
-		    	System.out.println("Enter Zip again");
-			return b;
+		else
+			System.out.println("Enter Zip again");
+		return b;
 	}
 
 	public String getPhoneNo() {
@@ -89,12 +88,12 @@ public class Contacts {
 	}
 
 	public boolean setPhoneNo(String phoneNo) {
-		 boolean b = validateContact.validatePhoneNo(phoneNo);
-		    if(b)
+		boolean b = validateContact.validatePhoneNo(phoneNo);
+		if (b)
 			this.phoneNo = phoneNo;
-		    else
-		    	System.out.println("Enter Phone No again");
-			return b;
+		else
+			System.out.println("Enter Phone No again");
+		return b;
 	}
 
 	public String getEmail() {
@@ -102,14 +101,13 @@ public class Contacts {
 	}
 
 	public boolean setEmail(String email) {
-		 boolean b = validateContact.validateEmail(email);
-		    if(b)
+		boolean b = validateContact.validateEmail(email);
+		if (b)
 			this.email = email;
-		    else
-		    	System.out.println("Enter Email again");
-			return b;
+		else
+			System.out.println("Enter Email again");
+		return b;
 	}
-	
 
 	@Override
 	public String toString() {
