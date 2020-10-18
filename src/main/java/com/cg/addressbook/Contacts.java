@@ -1,8 +1,34 @@
 package com.cg.addressbook;
 
-public class Contacts {
-	private String firstName, lastName, name, address, city, state, zip, phoneNo, email;
+import com.opencsv.bean.CsvBindByName;
 
+public class Contacts {
+
+	@CsvBindByName
+	private String firstName;
+
+	@CsvBindByName
+	private String lastName;
+	
+	@CsvBindByName
+	private String address;
+	
+	@CsvBindByName
+	private String city;
+	
+	@CsvBindByName
+	private String state;
+	
+	@CsvBindByName
+	private String zip;
+	
+
+	@CsvBindByName(column = "PhoneNumber")
+	private String phoneNo;
+	
+	@CsvBindByName
+	private String email;
+	
 	ValidateContact validateContact = new ValidateContact();
 
 	public Contacts() {
