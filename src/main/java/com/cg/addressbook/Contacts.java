@@ -28,8 +28,6 @@ public class Contacts {
 	
 	@CsvBindByName
 	private String email;
-	
-	ValidateContact validateContact = new ValidateContact();
 
 	public Contacts() {
 
@@ -52,6 +50,7 @@ public class Contacts {
 	}
 
 	public boolean setFirstName(String firstName) {
+		ValidateContact validateContact = new ValidateContact();
 		boolean b = validateContact.validateFirstName(firstName);
 		if (b)
 			this.firstName = firstName;
@@ -65,6 +64,7 @@ public class Contacts {
 	}
 
 	public boolean setLastName(String lastName) {
+		ValidateContact validateContact = new ValidateContact();
 		boolean b = validateContact.validateLastName(lastName);
 		if (b)
 			this.lastName = lastName;
@@ -78,6 +78,7 @@ public class Contacts {
 	}
 
 	public boolean setAddress(String address) {
+		ValidateContact validateContact = new ValidateContact();
 		boolean b = validateContact.validateAddress(address);
 		if (b)
 			this.address = address;
@@ -91,6 +92,7 @@ public class Contacts {
 	}
 
 	public boolean setCity(String city) {
+		ValidateContact validateContact = new ValidateContact();
 		boolean b = validateContact.validateCity(city);
 		if (b)
 			this.city = city;
@@ -104,6 +106,7 @@ public class Contacts {
 	}
 
 	public boolean setState(String state) {
+		ValidateContact validateContact = new ValidateContact();
 		boolean b = validateContact.validateState(state);
 		if (b)
 			this.state = state;
@@ -117,6 +120,7 @@ public class Contacts {
 	}
 
 	public boolean setZip(String zip) {
+		ValidateContact validateContact = new ValidateContact();
 		boolean b = validateContact.validateZip(zip);
 		if (b)
 			this.zip = zip;
@@ -130,6 +134,7 @@ public class Contacts {
 	}
 
 	public boolean setPhoneNo(String phoneNo) {
+		ValidateContact validateContact = new ValidateContact();
 		boolean b = validateContact.validatePhoneNo(phoneNo);
 		if (b)
 			this.phoneNo = phoneNo;
@@ -143,6 +148,7 @@ public class Contacts {
 	}
 
 	public boolean setEmail(String email) {
+		ValidateContact validateContact = new ValidateContact();
 		boolean b = validateContact.validateEmail(email);
 		if (b)
 			this.email = email;

@@ -11,7 +11,7 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 public class AddressBookFileIOTest {
- /*    
+     
 	@SuppressWarnings("deprecation")
 	@Test
 	public void givenContactsInFileShouldRead() {
@@ -34,7 +34,7 @@ public class AddressBookFileIOTest {
 		addressBookFileIOService.writeData(contactList);
 		Assert.assertEquals(2, addressBookFileIOService.countEntries());
 	}
-	*/
+	
 	@SuppressWarnings("deprecation")
 	@Test
 	public void givenContactsFromCSVFileShouldRead() {
@@ -55,6 +55,32 @@ public class AddressBookFileIOTest {
 		contactList.add(contact1);
 		contactList.add(contact2);
 		boolean b = addressBookFileIOService.writeCSVData(contactList);
+		Assert.assertTrue(b);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void writeContactsToJsonFile() {
+		AddressBookFileIOService addressBookFileIOService = new AddressBookFileIOService();
+		List<Contacts> contactList = new ArrayList<>();
+		Contacts contact1 = new Contacts("Arijit", "Dey", "sodepur", "kolkata", "WB", "123456", "7878787878", "arijiy@yahoo.co.in");
+		Contacts contact2 = new Contacts("Partha", "Saha", "NewTown", "BidhanNagar", "WB", "785478", "9856257845", "partha@gmail.com");
+		contactList.add(contact1);
+		contactList.add(contact2);
+		boolean b = addressBookFileIOService.writeJsonData(contactList);
+		Assert.assertTrue(b);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void readContactsFromJsonFile() {
+		AddressBookFileIOService addressBookFileIOService = new AddressBookFileIOService();
+		List<Contacts> contactList = new ArrayList<>();
+		Contacts contact1 = new Contacts("Arijit", "Dey", "sodepur", "kolkata", "WB", "123456", "7878787878", "arijiy@yahoo.co.in");
+		Contacts contact2 = new Contacts("Partha", "Biswas", "NewTown", "BidhanNagar", "WB", "785478", "9856257845", "partha@gmail.com");
+		contactList.add(contact1);
+		contactList.add(contact2);
+		boolean b = addressBookFileIOService.readJsonFile();
 		Assert.assertTrue(b);
 	}
 }
