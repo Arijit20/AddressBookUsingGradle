@@ -1,5 +1,6 @@
 package com.cg.addressbook;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.Before;
@@ -37,4 +38,11 @@ public class AddressBookDBTest {
 		Assert.assertEquals("kerala", contact.getState());
 	}
 
+	@Test
+	public void givenAddressBookDB_WhenRetrivedBasedOnDate_ShouldReturnCount() throws AddressBookDBException {
+		LocalDate startDate = LocalDate.of(2017, 01, 01);
+		LocalDate endDate = LocalDate.now();
+		int noOfContacts= addressBookDBService.getContactsOnDateRange(startDate, endDate);
+		Assert.assertEquals(2, noOfContacts);
+	}
 }
