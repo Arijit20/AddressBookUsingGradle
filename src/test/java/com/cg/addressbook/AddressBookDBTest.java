@@ -57,4 +57,12 @@ public class AddressBookDBTest {
 		int noOfContacts = addressBookDBService.retriveBasedOnField("state","wb");
 		Assert.assertEquals(1, noOfContacts);
 	}
+	
+	@Test
+	public void whenContactAddedToDB_ShouldMatchCount() throws AddressBookDBException {
+		addressBookDBService.addContactToDB("Saikat","Sarkar","dunlop","howrah","wb",
+				                            "789987","7414585658","saikat@yahoo.co.in", LocalDate.now());
+		List<Contacts> contactList = addressBookDBService.readContacts();
+		Assert.assertEquals(3, contactList.size());
+	}
 }
