@@ -95,6 +95,22 @@ public class AddressBookDBService {
 			throw new AddressBookDBException(AddressBookDBException.ExceptionType.CONNECTION_ERROR, e.getMessage());
 		}
 		return noOfContacts;
+	}
+
+	public int retriveBasedOnField(String field, String value) throws AddressBookDBException {
+		// TODO Auto-generated method stub
+		String sql = String.format("SELECT id FROM address WHERE %s = '%s';",field, value);
+		int noOfContacts = 0;
+		try (Connection connection = getConnection()) {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				noOfContacts++;
+			}
+		} catch (SQLException e) {
+			throw new AddressBookDBException(AddressBookDBException.ExceptionType.CONNECTION_ERROR, e.getMessage());
+		}
+		return noOfContacts;
 	}	
 }
 
