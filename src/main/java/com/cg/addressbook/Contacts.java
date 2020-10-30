@@ -1,5 +1,7 @@
 package com.cg.addressbook;
 
+import java.time.LocalDate;
+
 import com.opencsv.bean.CsvBindByName;
 
 public class Contacts {
@@ -28,6 +30,8 @@ public class Contacts {
 	
 	@CsvBindByName
 	private String email;
+	
+	private LocalDate startDate;
 
 	public Contacts() {
 
@@ -43,6 +47,12 @@ public class Contacts {
 		this.setZip(zip);
 		this.setPhoneNo(phoneNo);
 		this.setEmail(email);
+	}
+	
+	public Contacts(String firstName, String lastName, String address, String city, String state, String zip,
+			String phoneNo, String email, LocalDate startDate) {
+		this(firstName, lastName, address, city, state, zip, phoneNo, email);
+		this.startDate = startDate;
 	}
 
 	public String getFirstName() {
@@ -156,11 +166,30 @@ public class Contacts {
 			System.out.println("Enter Email again");
 		return b;
 	}
+	
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
 
 	@Override
 	public String toString() {
 		return "FirstName : " + firstName + " LastName : " + lastName + " Address : " + address + " City : " + city
 				+ " State : " + state + " Zip : " + zip + " Phone No : " + phoneNo + " Email : " + email;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+	    Contacts that = (Contacts) o;
+		return this.firstName == that.firstName && this.lastName == that.lastName
+				&& this.address == that.address && this.city == that.city && this.state == that.state
+				&& this.zip == that.zip && this.phoneNo == that.phoneNo && this.email == that.email;
 	}
 
 }
