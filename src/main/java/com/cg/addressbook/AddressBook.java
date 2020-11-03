@@ -13,9 +13,19 @@ public class AddressBook {
 	public AddressBook() {
 		contactMap = new TreeMap<>();
 	}
+	
+	public AddressBook(List<Contacts> contactList) {
+		this();
+		AddressBook.contactList = new LinkedList<>(contactList);
+	}
 
 	public Map<String, Contacts> getContactMap() {
 		return contactMap;
+	}
+	
+	public void addNewContact(Contacts contact) {
+		contactList.add(new Contacts(contact.getId(), contact.getFirstName(), contact.getLastName(),contact.getAddress(), contact.getCity(),
+				contact.getState(),contact.getZip(), contact.getPhoneNo(), contact.getEmail()));
 	}
 
 	public void addNewContact() {
