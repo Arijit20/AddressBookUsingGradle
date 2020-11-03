@@ -1,4 +1,4 @@
-package com.cg.addressbook;
+package com.cg.addressbook.service;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,7 +13,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class AddressBookDBService {
+import com.cg.addressbook.AddressBook;
+import com.cg.addressbook.AddressBookDBException;
+import com.cg.addressbook.dto.Contacts;
+
+public class AddressBookDBService implements ISyncWithDB{
 	
 	private synchronized Connection getConnection() throws AddressBookDBException {
 		String jdbcURL = "jdbc:mysql://localhost:3306/addressbook_database?allowPublicKeyRetrieval=true&&useSSL=false";
@@ -26,7 +30,7 @@ public class AddressBookDBService {
 		}
 	}
 
-	public List<Contacts> readContacts() throws AddressBookDBException {
+	public List<Contacts> readData() throws AddressBookDBException {
 		Map<Integer, Boolean> contactStatusMap = new HashMap<Integer, Boolean>();
 		synchronized (this) {
 			contactStatusMap.put(1, false);
@@ -104,7 +108,7 @@ public class AddressBookDBService {
 	}
 
 	public Contacts isAddressBookInSyncWithDB(String firstName) throws AddressBookDBException {
-		List<Contacts> tempList = this.readContacts();
+		List<Contacts> tempList = this.readData();
 		return tempList.stream()
 				.filter(contact -> contact.getFirstName().contentEquals(firstName))
 				.findFirst()
@@ -142,7 +146,7 @@ public class AddressBookDBService {
 		return noOfContacts;
 	}
 
-	public void addContactToDB(String firstName, String lastName, String address, String city, String state,
+	public void writeData(String firstName, String lastName, String address, String city, String state,
 			                   String zip, String phoneNo, String email, LocalDate start) throws AddressBookDBException {
 		int id = -1;
 		Contacts contact = null;
@@ -199,13 +203,13 @@ public class AddressBookDBService {
 		}
 	}
 
-	public void addMultipleContacts(List<Contacts> contactsToAddList) throws AddressBookDBException {
+	public boolean writeData(List<Contacts> contactsToAddList) throws AddressBookDBException {
 		Map<Integer, Boolean> contactStatusMap = new HashMap<Integer, Boolean>();
 		contactsToAddList.forEach(contact -> {
 			contactStatusMap.put(contact.hashCode(), false);
 			Runnable task = () -> {
 				try {
-					this.addContactToDB(contact.getFirstName(), contact.getLastName(), contact.getAddress(),contact.getCity(), 
+					this.writeData(contact.getFirstName(), contact.getLastName(), contact.getAddress(),contact.getCity(), 
 							 contact.getState(), contact.getZip(), contact.getPhoneNo(), contact.getEmail(), contact.getStartDate());
 				} catch (AddressBookDBException e) {
 					// TODO Auto-generated catch block
@@ -222,6 +226,7 @@ public class AddressBookDBService {
 				throw new AddressBookDBException(AddressBookDBException.ExceptionType.CONNECTION_ERROR, e.getMessage());
 			}
 		}
+		return true;
 	}	
 }
 

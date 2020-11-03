@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.cg.addressbook.dto.Contacts;
 import com.google.gson.Gson;
 
 import io.restassured.RestAssured;
@@ -46,7 +47,7 @@ public class AddressBookRestAPITest {
 	}
 	
 	@Test
-	public void givenContacts_WhenAdded_ShouldMatchStatusAndCount() {
+	public void givenContacts_WhenAdded_ShouldMatchStatusAndCount() throws AddressBookDBException {
 		Contacts[] arrOfContact = getContactList();
 		AddressBook addressBook;
 		addressBook = new AddressBook(Arrays.asList(arrOfContact));
@@ -80,7 +81,11 @@ public class AddressBookRestAPITest {
 			int statusCode = response.getStatusCode();
 			Assert.assertEquals(201, statusCode);	
 			Contacts newContact = new Gson().fromJson(response.asString(), Contacts.class);
-			addressBook.addNewContact(newContact);
+			try {
+				addressBook.addNewContact(newContact);
+			} catch (AddressBookDBException e) {
+				e.printStackTrace();
+			}
 			contactStatusMap.put(contact.hashCode(), true);
 			};
 			Thread thread = new Thread(task);
