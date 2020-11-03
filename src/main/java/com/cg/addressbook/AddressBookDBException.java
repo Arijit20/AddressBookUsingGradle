@@ -2,7 +2,7 @@ package com.cg.addressbook;
 
 public class AddressBookDBException extends Exception{
 
-	enum ExceptionType{
+	public enum ExceptionType{
 		CONNECTION_ERROR, INCORRECT_INFO
 	}
 

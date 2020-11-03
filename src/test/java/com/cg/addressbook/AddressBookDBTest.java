@@ -7,6 +7,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.cg.addressbook.dto.Contacts;
+import com.cg.addressbook.service.AddressBookDBService;
+
 import junit.framework.Assert;
 
 public class AddressBookDBTest {
@@ -20,7 +23,7 @@ public class AddressBookDBTest {
 
 	@Test
 	public void givenAddressBookDB_ShouldMatchCount() throws AddressBookDBException {
-		List<Contacts> contactList = addressBookDBService.readContacts();
+		List<Contacts> contactList = addressBookDBService.readData();
 		Assert.assertEquals(2, contactList.size());
 	}
 	
@@ -61,9 +64,9 @@ public class AddressBookDBTest {
 	
 	@Test
 	public void whenContactAddedToDB_ShouldMatchCount() throws AddressBookDBException {
-		addressBookDBService.addContactToDB("Saikat","Sarkar","dunlop","howrah","wb",
+		addressBookDBService.writeData("Saikat","Sarkar","dunlop","howrah","wb",
 				                            "789987","7414585658","saikat@yahoo.co.in", LocalDate.now());
-		List<Contacts> contactList = addressBookDBService.readContacts();
+		List<Contacts> contactList = addressBookDBService.readData();
 		Assert.assertEquals(3, contactList.size());
 	}
 	
@@ -74,8 +77,8 @@ public class AddressBookDBTest {
 		new Contacts("Pratay","Mukherjee","sector1","noida","up","989652","8525252456","pratay@yahoo.co.in",LocalDate.now()),
 		new Contacts("Arjun","Sarkar","sector2","noida","up","780014","7415263258","arjun@gmail.com",LocalDate.now())
 		};
-		addressBookDBService.addMultipleContacts(Arrays.asList(arrOfContacts));
-		List<Contacts> contactList = addressBookDBService.readContacts();
+		addressBookDBService.writeData(Arrays.asList(arrOfContacts));
+		List<Contacts> contactList = addressBookDBService.readData();
 		Assert.assertEquals(6, contactList.size());
 	}
 }

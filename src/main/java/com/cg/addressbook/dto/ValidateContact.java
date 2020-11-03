@@ -1,4 +1,4 @@
-package com.cg.addressbook;
+package com.cg.addressbook.dto;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

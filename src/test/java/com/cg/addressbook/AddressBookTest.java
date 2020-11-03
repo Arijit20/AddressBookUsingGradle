@@ -2,6 +2,8 @@
 package com.cg.addressbook;
 import org.junit.Test;
 import com.cg.addressbook.AddressBookMain;
+import com.cg.addressbook.dto.ValidateContact;
+
 import static org.junit.Assert.*;
 
 import org.junit.Assert;

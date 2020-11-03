@@ -1,13 +1,15 @@
 package com.cg.addressbook;
 
 import java.util.*;
+
 import java.util.stream.Collectors;
 
-import com.cg.addressbook.Contacts;
+import com.cg.addressbook.dto.Contacts;
+import com.cg.addressbook.service.AddressBookDBService;
 
 public class AddressBook {
 	Scanner in = new Scanner(System.in);
-	static LinkedList<Contacts> contactList = new LinkedList<>();
+	public static LinkedList<Contacts> contactList = new LinkedList<>();
 	Map<String, Contacts> contactMap = new TreeMap<>();
 
 	public AddressBook() {
@@ -23,9 +25,11 @@ public class AddressBook {
 		return contactMap;
 	}
 	
-	public void addNewContact(Contacts contact) {
+	public void addNewContact(Contacts contact) throws AddressBookDBException {
 		contactList.add(new Contacts(contact.getId(), contact.getFirstName(), contact.getLastName(),contact.getAddress(), contact.getCity(),
 				contact.getState(),contact.getZip(), contact.getPhoneNo(), contact.getEmail()));
+		AddressBookDBService addressBookDBService = new AddressBookDBService();
+		addressBookDBService.writeData(contactList);
 	}
 
 	public void addNewContact() {
@@ -77,6 +81,12 @@ public class AddressBook {
 		} else {
 			contactMap.put(name, person);
 			contactList.add(person);
+			AddressBookDBService addressBookDBService = new AddressBookDBService();
+			try {
+				addressBookDBService.writeData(contactList);
+			} catch (AddressBookDBException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

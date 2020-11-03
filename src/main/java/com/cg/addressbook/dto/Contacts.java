@@ -1,4 +1,4 @@
-package com.cg.addressbook;
+package com.cg.addressbook.dto;
 
 import java.time.LocalDate;
 

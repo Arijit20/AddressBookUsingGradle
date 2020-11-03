@@ -1,15 +1,15 @@
 package com.cg.addressbook;
 
 import java.util.*;
+
 import java.util.stream.Collectors;
 
-import com.cg.addressbook.Contacts;
-import com.cg.addressbook.ValidateContact;
+import com.cg.addressbook.dto.Contacts;
+import com.cg.addressbook.dto.ValidateContact;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.cg.addressbook.Contacts;
 
 public class AddressBookList {
 	Scanner in = new Scanner(System.in);
