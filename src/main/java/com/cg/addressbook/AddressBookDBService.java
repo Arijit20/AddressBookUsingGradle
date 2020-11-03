@@ -27,16 +27,30 @@ public class AddressBookDBService {
 	}
 
 	public List<Contacts> readContacts() throws AddressBookDBException {
-		// TODO Auto-generated method stub
+		Map<Integer, Boolean> contactStatusMap = new HashMap<Integer, Boolean>();
+		synchronized (this) {
+			contactStatusMap.put(1, false);
+			Runnable task = () -> {
 		String sql = "select c.first_name, c.last_name, a.street, a.city, a.state, a.zip, c.phone, c.email"+
 		              " from contacts c, address a where c.id = a.id ;";
-		//List<Contacts> contactList = new ArrayList<Contacts>();
+		
 		try(Connection connection = this.getConnection()){
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(sql);
 			AddressBook.contactList = (LinkedList<Contacts>) getContactData(result);
-		}catch(SQLException e) {
-			throw new AddressBookDBException(AddressBookDBException.ExceptionType.CONNECTION_ERROR, e.getMessage());
+		} catch (SQLException | AddressBookDBException e) {
+			e.printStackTrace();
+		} contactStatusMap.put(1, true);
+			};
+			Thread thread = new Thread(task);
+			thread.start();
+		}
+		while (contactStatusMap.containsValue(false)) {
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		return AddressBook.contactList;
 	}
@@ -62,18 +76,34 @@ public class AddressBookDBService {
 		}
 
 	public int updatePersonAddress(String firstName, String column, String value) throws AddressBookDBException {
-		// TODO Auto-generated method stub
+		Map<Integer, Boolean> contactStatusMap = new HashMap<Integer, Boolean>();
+		int[] result= new int[1];
+		synchronized (this) {
+			contactStatusMap.put(1, false);
+			Runnable task = () -> {
 		String sql =String.format ("update address a,contacts c set a.%s ='%s' where a.id = c.id and c.first_name = '%s';", column, value, firstName);
 		try(Connection connection = this.getConnection()){
 			Statement statement = connection.createStatement();
-			return statement.executeUpdate(sql);
-		}catch(SQLException e) {
-			throw new AddressBookDBException(AddressBookDBException.ExceptionType.CONNECTION_ERROR, e.getMessage());
+			result[0] = statement.executeUpdate(sql);
+		}catch(SQLException | AddressBookDBException e) {
+			e.printStackTrace();
 		}
+		 contactStatusMap.put(1, true);
+			};
+			Thread thread = new Thread(task);
+			thread.start();
+		}
+		while (contactStatusMap.containsValue(false)) {
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		return result[0];
 	}
 
 	public Contacts isAddressBookInSyncWithDB(String firstName) throws AddressBookDBException {
-		// TODO Auto-generated method stub
 		List<Contacts> tempList = this.readContacts();
 		return tempList.stream()
 				.filter(contact -> contact.getFirstName().contentEquals(firstName))
@@ -82,7 +112,6 @@ public class AddressBookDBService {
 	}
 
 	public int getContactsOnDateRange(LocalDate startDate, LocalDate endDate) throws AddressBookDBException{
-		// TODO Auto-generated method stub
 		String sql = String.format("SELECT id FROM contacts WHERE start BETWEEN '%s' AND '%s';",
 				Date.valueOf(startDate), Date.valueOf(endDate));
 		int noOfContacts = 0;
@@ -99,7 +128,6 @@ public class AddressBookDBService {
 	}
 
 	public int retriveBasedOnField(String field, String value) throws AddressBookDBException {
-		// TODO Auto-generated method stub
 		String sql = String.format("SELECT id FROM address WHERE %s = '%s';",field, value);
 		int noOfContacts = 0;
 		try (Connection connection = getConnection()) {
@@ -116,7 +144,6 @@ public class AddressBookDBService {
 
 	public void addContactToDB(String firstName, String lastName, String address, String city, String state,
 			                   String zip, String phoneNo, String email, LocalDate start) throws AddressBookDBException {
-		// TODO Auto-generated method stub
 		int id = -1;
 		Contacts contact = null;
 		Connection connection = null;
